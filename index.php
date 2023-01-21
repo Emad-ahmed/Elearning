@@ -1,35 +1,5 @@
-<?php
 
-session_start();
-
-?>
-
-<!DOCTYPE html>
-<html>
-
-    <head>
-        <link rel="shortcut icon" type="png" href="images/icon/favicon.png" />
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Comaptible" content="IE=edge" />
-        <title>E-Learning</title>
-        <meta name="desciption" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="style.css" />
-        <link rel="stylesheet" href="css/footer.css" />
-        <script type="text/javascript" src="script.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-        <script>
-        $(window).on("scroll", function() {
-            if ($(window).scrollTop()) {
-                $("nav").addClass("black");
-            } else {
-                $("nav").removeClass("black");
-            }
-        });
-        </script>
-
+<?php include('navbar.php') ?>
 
         <style>
         header {
@@ -50,43 +20,12 @@ session_start();
         }
         </style>
 
-    </head>
+    
 
 
-    <body>
-        <!-- Navigation Bar -->
+    
         <header id="header">
-            <nav>
-                <div>
-                    <a href="" class="elearn">E-Learning</a>
-                </div>
-                <ul class="mt-3">
-                    <li><a href="">Home</a></li>
-                    <li><a href="#courses">Courses</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#services_section">Services</a></li>
-                    <li><a href="#contactus">Contact</a></li>
-                    <li><a href="#feedback">Feedback</a></li>
-                    <li><a href="quiz/">Quiz</a></li>
-                </ul>
-                <div class="srch">
-                    <input type="text" class="search" placeholder="Search here..." /><img src="images/icon/search.png"
-                        alt="search" />
-                </div>
-                <?php
-      if (isset($_SESSION['email'])) {
-        echo '<a class="get-started" href="logout.php">Logout</a>';
-      } else if (isset($_SESSION['admin'])) {
-        echo '<a class="get-started" href="logout.php">Logout</a>';
-      } else {
-        echo '<a class="get-started" href="login.php">Login</a>';
-      }
-      ?>
-                <img src="images/icon/menu.png" class="menu" onclick="sideMenu(0)" alt="menu" />
-            </nav>
-
-
+           
 
             <div class="csec"></div>
 
@@ -148,25 +87,25 @@ session_start();
 
                 <div class="cbox">
                     <div class="course_list">
-                        <a href="python.php"><img src="images/courses/book.png" />Python</a>
+                        <a href="coursedata.php?topic=Python"><img src="images/courses/book.png" />Python</a>
                     </div>
                     <div class="course_list">
-                        <a href="cplus.php"><img src="images/courses/d1.png" />C++</a>
+                        <a href="coursedata.php?topic=C++"><img src="images/courses/d1.png" />C++</a>
                     </div>
                     <div class="course_list">
-                        <a href="c.php"><img src="images/courses/paper.png" />C</a>
+                        <a href="coursedata.php?topic=c"><img src="images/courses/paper.png" />C</a>
                     </div>
                     <div class="course_list">
-                        <a href="java.php"><img src="images/courses/d1.png" />Java</a>
+                        <a href="coursedata.php?topic=java"><img src="images/courses/d1.png" />Java</a>
                     </div>
                     <div class="course_list">
-                        <a href="physics.php"><img src="images/courses/d1.png" />Physics</a>
+                        <a href="coursedata.php?topic=physics"><img src="images/courses/d1.png" />Physics</a>
                     </div>
                     <div class="course_list">
-                        <a href="che.php"><img src="images/courses/d1.png" />Chemistry</a>
+                        <a href="coursedata.php?topic=chemistry"><img src="images/courses/d1.png" />Chemistry</a>
                     </div>
                     <div class="course_list">
-                        <a href="math.php"><img src="images/courses/d1.png" />Math</a>
+                        <a href="coursedata.php?topic=math"><img src="images/courses/d1.png" />Math</a>
                     </div>
 
                 </div>
@@ -223,16 +162,44 @@ session_start();
             <p>We're increasing this data every year</p>
             <div class="smbox">
                 <span>
-                    <center>
-                        <div class="data">154</div>
-                        <div class="course_list">Enrolled Students</div>
-                    </center>
+                <?php
+        include 'config.php';
+
+        $sql = "SELECT * from user";
+
+        if ($result = mysqli_query($conn, $sql)) {
+
+            // Return the number of rows in result set
+            $rowcount = mysqli_num_rows( $result );
+            
+            // Display result
+            echo "<center>
+            <div class='data'>$rowcount</div>
+            <div class='course_list'>Enrolled Students</div>
+        </center>";
+        }
+        ?>
+                    
                 </span>
                 <span>
-                    <center>
-                        <div class="data">62</div>
-                        <div class="course_list">Total Courses</div>
-                    </center>
+                <?php
+        include 'config.php';
+
+        $sql = "SELECT * from user";
+
+        if ($result = mysqli_query($conn, $sql)) {
+
+            // Return the number of rows in result set
+            $rowcount = mysqli_num_rows( $result );
+            
+            // Display result
+            echo "<center>
+            <div class='data'>$rowcount</div>
+            <div class='course_list'>Total Courses</div>
+        </center>";
+        }
+        ?>
+                    
                 </span>
                 <span>
                     <center>
@@ -277,16 +244,16 @@ session_start();
 
             <div class="back-contact">
                 <div class="cc">
-                    <form action="mailto:elearning@gmail.com" method="post" enctype="text/plain">
+                    <form action="contactus.php" method="POST">
                         <label>First Name <span class="imp">*</span></label><label style="margin-left: 130px">Last Name
                             <span class="imp">*</span></label><br />
                         <center>
-                            <input type="text" name="" style="margin-right: 10px; width: 175px"
+                            <input type="text" name="fname" style="margin-right: 10px; width: 175px"
                                 required="required" /><input type="text" name="lname" style="width: 175px"
                                 required="required" /><br />
                         </center>
                         <label>Email <span class="imp">*</span></label><br />
-                        <input type="email" name="mail" style="width: 100%" required="required" /><br />
+                        <input type="email" name="email" style="width: 100%" required="required" /><br />
                         <label>Message <span class="imp">*</span></label><br />
                         <input type="text" name="message" style="width: 100%" required="required" /><br />
                         <label>Additional Details</label><br />
@@ -326,28 +293,4 @@ session_start();
 
         </div>
 
-        <!-- Sliding Information -->
-        <marquee style="
-        background: #DF2771;
-        margin-top: 50px;" direction="left" onmouseover="this.stop()" onmouseout="this.start()" scrollamount="10">
-            <div class="marqu">
-                “Education is the passport to the future, for tomorrow belongs to those
-                who prepare for it today.” “Your attitude, not your aptitude, will
-                determine your altitude.” “If you think education is expensive, try
-                ignorance.” “The only person who is educated is the one who has learned
-                how to learn …and change.”
-            </div>
-        </marquee>
-
-        <!-- FOOTER -->
-        <footer>
-            <p>Copyright &copy; 2022 <img src="images/icon/favicon.png" alt="logo"> All Rights Reserved.</p>
-        </footer>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
-        </script>
-
-    </body>
-
-</html>
+<?php include('footer.php') ?>

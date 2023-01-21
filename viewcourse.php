@@ -1,34 +1,4 @@
-<?php
-
-session_start();
-
-?>
-
-<!DOCTYPE html>
-<html>
-
-    <head>
-        <link rel="shortcut icon" type="png" href="images/icon/favicon.png" />
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Comaptible" content="IE=edge" />
-        <title>E-Learning</title>
-        <meta name="desciption" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="style.css" />
-        <link rel="stylesheet" href="css/footer.css" />
-        <script type="text/javascript" src="script.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-        <script>
-        $(window).on("scroll", function() {
-            if ($(window).scrollTop()) {
-                $("nav").addClass("black");
-            } else {
-                $("nav").removeClass("black");
-            }
-        });
-        </script>
+<?php include('navbar2.php') ?>
 
 
         <style>
@@ -54,30 +24,12 @@ session_start();
         }
         </style>
 
-    </head>
 
 
     <body>
         <!-- Navigation Bar -->
         <header id="header">
-            <nav>
-                <div>
-                    <a href="index.php" class="elearn">E-Learning</a>
-                </div>
-
-                <?php
-            if (isset($_SESSION['email'])) {
-                echo '<a class="get-started" href="logout.php">Logout</a>';
-            } else if (isset($_SESSION['admin'])) {
-                echo '<a class="get-started" href="logout.php">Logout</a>';
-            } else {
-                echo '<a class="get-started" href="login.php">Login</a>';
-            }
-            ?>
-                <img src="images/icon/menu.png" class="menu" onclick="sideMenu(0)" alt="menu" />
-            </nav>
-
-
+            
             <div class="container" style="margin-top: 7rem">
                 <h1 class="text-center mb-3 mt-4">View Course</h1>
                 <div style="overflow-x:auto;">
@@ -88,10 +40,9 @@ session_start();
                             <tr>
                                 <th>Sno.</th>
                                 <th>Topic</th>
-                                <th>Title</th>
-                                <th>Description</th>
+                                <th>Name Of Course</th>
+                                <th>Name Of Teacher</th>
                                 <th>Image</th>
-                                <th>Video Link</th>
                                 <th>Delete</th>
                                 <th>Edit</th>
                             </tr>
@@ -101,22 +52,22 @@ session_start();
 
                         include 'config.php';
 
-                        $alldata = mysqli_query($conn, "SELECT * FROM `course`");
+                        $alldata = mysqli_query($conn, "SELECT * FROM `category_course`");
 
                         while ($row = mysqli_fetch_array($alldata)) {
                             echo "<tr>
-                    <td>$row[id]</td>
-                    <td>$row[topic]</td>
-                    <td>$row[title]</td>
-                    <td>$row[description]</td>
-                    <td><img src='$row[image]' alt=''></td>
-                    <td>$row[video_link]</td>
-                 
+                            <td>$row[id]</td>
+                            <td>$row[topic]</td>
+                            <td>$row[name_of_course]</td>
+                            <td>$row[name_of_teacher]</td>
+                            <td><img src='$row[image]' alt=''></td>
+
+                        
             
                   
                    
-                    <td><a href='delettaecher.php? id=$row[id]' class='btn btn-danger'>Delete</a></td>
-                    <td><a href='updateteacher.php? id=$row[id]' class='btn btn-info'>Edit</a></td>
+                    <td><a href='deletecourse.php? id=$row[id]' class='btn btn-danger'>Delete</a></td>
+                    <td><a href='updatecourse.php? id=$row[id]' class='btn btn-info'>Edit</a></td>
                     </tr>";
                         }
 
@@ -155,10 +106,4 @@ session_start();
 
 
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-                crossorigin="anonymous"></script>
-
-    </body>
-
-</html>
+          

@@ -1,5 +1,5 @@
 <?php
-    include_once 'database.php';
+    include 'database.php';
     session_start();
     if(isset($_SESSION["email"]))
 	{
@@ -17,10 +17,10 @@
         $password = stripslashes($password); 
         $password = addslashes($password);
 
-        $email = mysqli_real_escape_string($con,$email);
-        $password = mysqli_real_escape_string($con,$password);
+        $email = mysqli_real_escape_string($conn,$email);
+        $password = mysqli_real_escape_string($conn,$password);
         
-        $result = mysqli_query($con,"SELECT email FROM admin WHERE email = '$email' and password = '$password'") or die('Error');
+        $result = mysqli_query($conn,"SELECT email FROM admin WHERE email = '$email' and password = '$password'") or die('Error');
         $count=mysqli_num_rows($result);
         if($count==1)
         {

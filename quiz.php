@@ -1,25 +1,10 @@
-<?php
-    include 'database.php';
-    session_start();
-
-    $email = $_SESSION['email'];
-   
-    if (!(isset($_SESSION['email'])))
-    {
-        echo "<script>location.href = '../login.php'</script>";
-    } 
-    
-
-    
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Welcome | Online Quiz System</title>  
+    <title>E-Learning</title>
     <link  rel="stylesheet" href="css/bootstrap.min.css"/>
     <link  rel="stylesheet" href="css/bootstrap-theme.min.css"/>    
     <link rel="stylesheet" href="css/welcome.css">
@@ -37,7 +22,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-        <a class="navbar-brand" href="../index.php"><b>E-Learning</b></a>
+        <a class="navbar-brand" href="#"><b>E-Learning</b></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -49,7 +34,7 @@
             
         </ul>
         <ul class="nav navbar-nav navbar-right">
-        <li <?php echo''; ?> > <a href="../logout.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Log out</a></li>
+        <li <?php echo''; ?> > <a href="logout.php?q=welcome.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Log out</a></li>
         </ul>
         
             
@@ -64,7 +49,7 @@
             <div class="col-md-12">
                 <?php if(@$_GET['q']==1) 
                 {
-                    $result = mysqli_query($conn,"SELECT * FROM quiz ORDER BY date DESC") or die('Error');
+                    $result = mysqli_query($con,"SELECT * FROM quiz ORDER BY date DESC") or die('Error');
                     echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
                     <tr><td><center><b>S.N.</b></center></td><td><center><b>Topic</b></center></td><td><center><b>Total question</b></center></td><td><center><b>Marks</center></b></td><td><center><b>Action</b></center></td></tr>';
                     $c=1;
@@ -73,7 +58,7 @@
                         $total = $row['total'];
                         $sahi = $row['sahi'];
                         $eid = $row['eid'];
-                    $q12=mysqli_query($conn,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
+                    $q12=mysqli_query($con,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
                     $rowcount=mysqli_num_rows($q12);	
                     if($rowcount == 0){
                         echo '<tr><td><center>'.$c++.'</center></td><td><center>'.$title.'</center></td><td><center>'.$total.'</center></td><td><center>'.$sahi*$total.'</center></td><td><center><b><a href="welcome.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'" class="btn sub1" style="color:black;margin:0px;background:#1de9b6"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Start</b></span></a></b></center></td></tr>';
@@ -93,7 +78,7 @@
                         $eid=@$_GET['eid'];
                         $sn=@$_GET['n'];
                         $total=@$_GET['t'];
-                        $q=mysqli_query($conn,"SELECT * FROM questions WHERE eid='$eid' AND sn='$sn' " );
+                        $q=mysqli_query($con,"SELECT * FROM questions WHERE eid='$eid' AND sn='$sn' " );
                         echo '<div class="panel" style="margin:5%">';
                         while($row=mysqli_fetch_array($q) )
                         {
@@ -101,7 +86,7 @@
                             $qid=$row['qid'];
                             echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br /><br />'.$qns.'</b><br /><br />';
                         }
-                        $q=mysqli_query($conn,"SELECT * FROM options WHERE qid='$qid' " );
+                        $q=mysqli_query($con,"SELECT * FROM options WHERE qid='$qid' " );
                         echo '<form action="update.php?q=quiz&step=2&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'" method="POST"  class="form-horizontal">
                         <br />';
 
@@ -117,7 +102,7 @@
                     if(@$_GET['q']== 'result' && @$_GET['eid']) 
                     {
                         $eid=@$_GET['eid'];
-                        $q=mysqli_query($conn,"SELECT * FROM history WHERE eid='$eid' AND email='$email' " )or die('Error157');
+                        $q=mysqli_query($con,"SELECT * FROM history WHERE eid='$eid' AND email='$email' " )or die('Error157');
                         echo  '<div class="panel">
                         <center><h1 class="title" style="color:#660033">Result</h1><center><br /><table class="table table-striped title1" style="font-size:20px;font-weight:1000;">';
 
@@ -132,7 +117,7 @@
                                 <tr style="color:red"><td>Wrong Answer&nbsp;<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></td><td>'.$w.'</td></tr>
                                 <tr style="color:#66CCFF"><td>Score&nbsp;<span class="glyphicon glyphicon-star" aria-hidden="true"></span></td><td>'.$s.'</td></tr>';
                         }
-                        $q=mysqli_query($conn,"SELECT * FROM rank WHERE  email='$email' " )or die('Error157');
+                        $q=mysqli_query($con,"SELECT * FROM rank WHERE  email='$email' " )or die('Error157');
                         while($row=mysqli_fetch_array($q) )
                         {
                             $s=$row['score'];
@@ -145,7 +130,7 @@
                 <?php
                     if(@$_GET['q']== 2) 
                     {
-                        $q=mysqli_query($conn,"SELECT * FROM history WHERE email='$email' ORDER BY date DESC " )or die('Error197');
+                        $q=mysqli_query($con,"SELECT * FROM history WHERE email='$email' ORDER BY date DESC " )or die('Error197');
                         echo  '<div class="panel title">
                         <table class="table table-striped title1" >
                         <tr style="color:black;"><td><center><b>S.N.</b></center></td><td><center><b>Quiz</b></center></td><td><center><b>Question Solved</b></center></td><td><center><b>Right</b></center></td><td><center><b>Wrong<b></center></td><td><center><b>Score</b></center></td>';
@@ -157,7 +142,7 @@
                         $w=$row['wrong'];
                         $r=$row['sahi'];
                         $qa=$row['level'];
-                        $q23=mysqli_query($conn,"SELECT title FROM quiz WHERE  eid='$eid' " )or die('Error208');
+                        $q23=mysqli_query($con,"SELECT title FROM quiz WHERE  eid='$eid' " )or die('Error208');
 
                         while($row=mysqli_fetch_array($q23) )
                         {  $title=$row['title'];  }
@@ -169,7 +154,7 @@
 
                     if(@$_GET['q']== 3) 
                     {
-                        $q=mysqli_query($conn,"SELECT * FROM rank ORDER BY score DESC " )or die('Error223');
+                        $q=mysqli_query($con,"SELECT * FROM rank ORDER BY score DESC " )or die('Error223');
                         echo  '<div class="panel title"><div class="table-responsive">
                         <table class="table table-striped title1" >
                         <tr style="color:red"><td><center><b>Rank</b></center></td><td><center><b>Name</b></center></td><td><center><b>Email</b></center></td><td><center><b>Score</b></center></td></tr>';
@@ -179,13 +164,13 @@
                         {
                             $e=$row['email'];
                             $s=$row['score'];
-                            $q12=mysqli_query($conn,"SELECT * FROM user WHERE email='$e' " )or die('Error231');
+                            $q12=mysqli_query($con,"SELECT * FROM user WHERE email='$e' " )or die('Error231');
                             while($row=mysqli_fetch_array($q12) )
                             {
                                 $name=$row['name'];
                             }
                             $c++;
-                            // echo '<tr><td style="color:black"><center><b>'.$c.'</b></center></td><td><center>''</center></td><td><center>'.$e.'</center></td><td><center>'.$s.'</center></td></tr>';
+                            echo '<tr><td style="color:black"><center><b>'.$c.'</b></center></td><td><center>'.$name.'</center></td><td><center>'.$e.'</center></td><td><center>'.$s.'</center></td></tr>';
                         }
                         echo '</table></div></div>';
                     }

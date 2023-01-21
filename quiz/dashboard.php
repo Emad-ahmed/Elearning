@@ -38,7 +38,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="Javascript:void(0)"><b>Online Quiz System</b></a>
+                <a class="navbar-brand" href="../index.php"><b>E-Learning</b></a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
@@ -68,7 +68,7 @@
 
                 if(@$_GET['q']== 2) 
                 {
-                    $q=mysqli_query($con,"SELECT * FROM rank  ORDER BY score DESC " )or die('Error223');
+                    $q=mysqli_query($conn,"SELECT * FROM rank  ORDER BY score DESC " )or die('Error223');
                     echo  '<div class="panel title"><div class="table-responsive">
                     <table class="table table-striped title1" >
                     <tr style="color:red"><td><center><b>Rank</b></center></td><td><center><b>Name</b></center></td><td><center><b>Score</b></center></td></tr>';
@@ -77,11 +77,10 @@
                     {
                         $e=$row['email'];
                         $s=$row['score'];
-                        $q12=mysqli_query($con,"SELECT * FROM user WHERE email='$e' " )or die('Error231');
+                        $q12=mysqli_query($conn,"SELECT * FROM user WHERE email='$e' " )or die('Error231');
                         while($row=mysqli_fetch_array($q12) )
                         {
                             $name=$row['name'];
-                            $college=$row['college'];
                         }
                         $c++;
                         echo '<tr><td style="color:#99cc32"><center><b>'.$c.'</b></center></td><td><center>'.$e.'</center></td><td><center>'.$s.'</center></td>';
@@ -92,16 +91,15 @@
                 <?php 
                     if(@$_GET['q']==1) 
                     {
-                        $result = mysqli_query($con,"SELECT * FROM user") or die('Error');
+                        $result = mysqli_query($conn,"SELECT * FROM user") or die('Error');
                         echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
-                        <tr><td><center><b>S.N.</b></center></td><td><center><b>Name</b></center></td><td><center><b>College</b></center></td><td><center><b>Email</b></center></td><td><center><b>Action</b></center></td></tr>';
+                        <tr><td><center><b>S.N.</b></center></td><td><center><b>Name</b></center></td><td><center><b>Email</b></center></td><td><center><b>Action</b></center></td></tr>';
                         $c=1;
                         while($row = mysqli_fetch_array($result)) 
                         {
                             $name = $row['name'];
                             $email = $row['email'];
-                            $college = $row['college'];
-                            echo '<tr><td><center>'.$c++.'</center></td><td><center>'.$name.'</center></td><td><center>'.$college.'</center></td><td><center>'.$email.'</center></td><td><center><a title="Delete User" href="update.php?demail='.$email.'"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></center></td></tr>';
+                            echo '<tr><td><center>'.$c++.'</center></td><td><center>'.$name.'</center></td><td><center>'.$email.'</center></td><td><center><a title="Delete User" href="update.php?demail='.$email.'"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></center></td></tr>';
                         }
                         $c=0;
                         echo '</table></div></div>';
@@ -222,7 +220,7 @@
                 <?php 
                     if(@$_GET['q']==5) 
                     {
-                        $result = mysqli_query($con,"SELECT * FROM quiz ORDER BY date DESC") or die('Error');
+                        $result = mysqli_query($conn,"SELECT * FROM quiz ORDER BY date DESC") or die('Error');
                         echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
                         <tr><td><center><b>S.N.</b></center></td><td><center><b>Topic</b></center></td><td><center><b>Total question</b></center></td><td><center><b>Marks</b></center></td><td><center><b>Action</b></center></td></tr>';
                         $c=1;
