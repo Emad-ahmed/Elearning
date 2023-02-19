@@ -1,11 +1,26 @@
 <?php include('navbar2.php') ?>
     <?php
     $topic = $_GET['topic'];
+    
+?>
+
+<?php
+include 'config.php';
+
+if(isset($_SESSION['email']))
+{
+  $email = $_SESSION['email'];    
+  $data = mysqli_query($conn, "SELECT * FROM `user` WHERE email='$email'");
+  $dataprofile = mysqli_fetch_array($data);
+
+  $id = $dataprofile['id'];
+}
+
 
 ?>
 
-
 <style>
+
   img
   {
     width:100%;
@@ -22,9 +37,12 @@
     text-decoration: none;
     border-radius: 10px;
   }
+
+
   .modal-dialog {
     background: #e63582;
   }
+
   .modal-content {
     background: #e63582;
   }
@@ -102,12 +120,12 @@
 </style>
 
 
-<div class="container">
-<h1 class="text-center mt-5 mb-5"style = "margin-top:10rem">Free Courses</h1>
-<div class="row mt-5">
+<div class="container" style="margin-top:-20rem;">
+<h1 class="text-center mb-5">Free Courses</h1>
+
+<div class="row ">
 
 <?php
-
 include 'config.php';
 
 $alldata = mysqli_query($conn, "SELECT * FROM category_course WHERE topic = '$topic' AND paid_or_free = 'Free'");
@@ -115,9 +133,7 @@ $alldata = mysqli_query($conn, "SELECT * FROM category_course WHERE topic = '$to
 while ($row = mysqli_fetch_array($alldata)) {
     
 
-
-    echo "
-            <div class='col-lg-4'>
+    echo "<div class='col-lg-4'>
             <a href='courseshow.php? id=$row[id]'>
                 <div class='card me-4 text-center' style='width: 18rem;'>
                 <img src='$row[image]' alt=''>
@@ -132,61 +148,7 @@ while ($row = mysqli_fetch_array($alldata)) {
 ?>
 
 
-<!-- Modal -->
 
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-white" id="exampleModalLabel">Bkash</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body mx-0">   
-      
-          <div class="bkash-border">
-            <div class="sub-border">
-              <h6 class="mt-35">Merchant: E-Learning</h4>
-                <h6>Invoice no: 01721545404</h4>
-              <h6 class="mt-2"></h4>
-              <h6 class="mt-3 mb-5">Amount:500</h4>
-              <form action="bkashAction.php" class="bkash-form" method="POST" >
-                <label for="phone"  class="mb-2 label1">Your Bkash Account Number</label> <br>
-                <input type="number"  id="phone" class="new-input" name="bkashnumber" placeholder="+88">
-        
-                <div class="mb-3 form-check mt-3">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  <label class="form-check-label" for="exampleCheck1">I agree the <a href="" class="text-white">terms and condition</a></label>
-                </div>
-        
-               <div class="text-center proced">   
-                  <button type="submit" class="btn bbtn">PROCEED</button>
-                  <button class="btn bbtn ms-3">Close</button>
-                  
-                </div>
-        
-               
-                    <p class="text-white phoneview"><i class="fa fa-phone" aria-hidden="true"></i> 16247</p>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        </div>
-      
-    </div>
-  </div>
-</div>
 
 
 </div>
@@ -202,23 +164,23 @@ while ($row = mysqli_fetch_array($alldata)) {
 
 include 'config.php';
 
-$alldata = mysqli_query($conn, "SELECT * FROM category_course WHERE topic = '$topic' AND paid_or_free = 'Paid' ");
+$alldata = mysqli_query($conn, "SELECT * FROM category_course WHERE topic = '$topic' AND paid_or_free = 'Paid'   ");
 
 while ($row = mysqli_fetch_array($alldata)) {
 
     echo "
     <div class='col-lg-4'>
-        <a href='courseshow.php? id=$row[id]'>
-                <div class='card me-4 text-center' style='width: 18rem;'>
+        <a href='payforcourse.php?id=$row[id]'>
+                <div class='card me-4 pb-5 text-center' style='width: 18rem;'>
                     <img src='$row[image]' alt=''>
-                    <div class='card-body'>
-                        <p class='myid'>$row[id]</p>
-                        <h4 class='card-title'>$row[name_of_course]</h4>
+             
+                        <h4 class='card-title mt-4'>$row[name_of_course]</h4>
                         <p class='card-text'>Instructor: $row[name_of_teacher]</p>
+                        <div class='w-50 m-auto mt-4'>
+                        <a href='payforcourse.php?id=$row[id]'  class='btn btn-info'>Add To Cart</a>
                     </div>
-                    <div class='w-50 m-auto'>
-                        <a href='' onclick='handleClick('hello')' class='btn btn-info' data-bs-toggle='modal' data-bs-target='#exampleModal'>Add To Cart</a>
                     </div>
+                   
                 </div>
             </a>
     </div>";

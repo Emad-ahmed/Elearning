@@ -3,33 +3,36 @@ include 'config.php';
 
 session_start();
 
+$id = $_GET['id'];
+$mobile = $_POST['mobile'];
+
 $email = $_SESSION['email'];
+echo $email;
 $datafetchquery = mysqli_query($conn, "SELECT * FROM `user` WHERE email = '$email'");
 $data = mysqli_fetch_array($datafetchquery);
 $user_id = $data['id'];
 
-
-$city = $_POST['city'];
-$mobile = $_POST['mobile'];
-$age = $_POST['age'];
-$profession = $_POST['profession'];
-$image = $_FILES['image'];
+echo $user_id;
 
 
+$datafetchquerycourse = mysqli_query($conn, "SELECT * FROM `category_course` WHERE id = '$id'");
+$datacourse = mysqli_fetch_array($datafetchquerycourse);
+$course_id = $data['id'];
+
+
+echo $course_id;
 
 
 
-$imageLocation = $image['tmp_name'];
-$imageName = $image['name'];
-$imageDes = 'ProfileImage/' . $imageName;
-move_uploaded_file($imageLocation, $imageDes);
 
-$insert_product = mysqli_query($conn, "INSERT INTO `complete_profile`(`user_id`, `image`, `city`, `age`, `mobile`, `profession`) VALUES ('$user_id','$imageDes','$city','$age','$mobile','$profession')");
+$insert_product = mysqli_query($conn, "INSERT INTO `bkash_payment`(`course_id`, `user_id`, `mobile_number`) VALUES ('$course_id','$user_id','$mobile')");
 
-if ($insert_product) {
-    echo "<script>alert('Profile Successfully Inserted')</script>";
-    echo "<script>location.href = 'profile.php'</script>";
+
+if ($insert_product)     {
+    echo "<script>alert('Bkash Payment Done')</script>";
+    $updatequery = mysqli_query($conn, "UPDATE `category_course` SET `paid_or_free`='Free' WHERE id='$id'");
+    echo "<script>location.href = 'payforcourse.php?id=$id'</script>";
 } else {
-    echo "<script>alert('Profile Not Inserted!')</script>";
-    echo "<script>location.href = 'profile.php'</script>";
+    echo "<script>alert('Bkash Payment Not Done!')</script>";
+    echo "<script>location.href = 'payforcourse.php?id=$id'</script>";
 }

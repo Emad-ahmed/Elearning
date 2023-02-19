@@ -2,12 +2,7 @@
 
  <?php include('navbar2.php') ?>
 
- <style>
-  .form_wrapper
-    {
-      margin-top: 8rem;
-    }
- </style>
+ 
 
   <div class="form_wrapper">
     <div class="form_container">
@@ -25,7 +20,6 @@
               <p class="mt-0 errorp" id="ferror"></p>
 
             </div>
-
 
             <div class="input_field mb-0">
               <span><i class="fa fa-envelope"></i></span>

@@ -1,12 +1,6 @@
 <?php include('navbar2.php') ?>
 
-  <style>
-    .form_wrapper
-    {
-      margin-top: 8rem;
-    }
-  </style>
- 
+  
 
   <div class="form_wrapper">
     <div class="form_container">

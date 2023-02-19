@@ -18,6 +18,10 @@
             color: white;
             padding: 1rem 1rem 1rem 1rem;
         }
+        .myimg
+        {
+            width:30rem;
+        }
         </style>
 
     
@@ -64,6 +68,7 @@
             padding: 100px;
             padding-bottom: 10px;
             color: black;
+            margin-top:-12rem;
           ">
                     Courses
                 </p>
@@ -127,10 +132,10 @@
             </center>
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="images/extra/e3.jpg" alt="">
+                    <img src="images/extra/e3.jpg" alt="" class="myimg">
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-6" style="margin-top:5rem">
                     Education is the passport to the future, for tomorrow belongs to
                     those who prepare for it today.” “Your attitude, not your aptitude,
                     will determine your altitude.” “If you think education is expensive,
@@ -185,7 +190,7 @@
                 <?php
         include 'config.php';
 
-        $sql = "SELECT * from user";
+        $sql = "SELECT * from course";
 
         if ($result = mysqli_query($conn, $sql)) {
 
@@ -202,10 +207,23 @@
                     
                 </span>
                 <span>
-                    <center>
-                        <div class="data">56</div>
-                        <div class="course_list">Paid Students</div>
-                    </center>
+                <?php
+                        include 'config.php';
+
+                        $sql = "SELECT * from category_course WHERE paid_or_free='Paid'";
+
+                        if ($result = mysqli_query($conn, $sql)) {
+
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows( $result );
+                            
+                            // Display result
+                            echo "<center>
+                            <div class='data'>$rowcount</div>
+                            <div class='course_list'>Paid Student</div>
+                        </center>";
+                        }
+                        ?>
                 </span>
             </div>
         </div>
@@ -245,13 +263,12 @@
             <div class="back-contact">
                 <div class="cc">
                     <form action="contactus.php" method="POST">
-                        <label>First Name <span class="imp">*</span></label><label style="margin-left: 130px">Last Name
-                            <span class="imp">*</span></label><br />
-                        <center>
+                        <label>First Name <span class="imp">*</span></label><label style="margin-left: 130px">Last Name<span class="imp">*</span></label><br />
+
                             <input type="text" name="fname" style="margin-right: 10px; width: 175px"
                                 required="required" /><input type="text" name="lname" style="width: 175px"
                                 required="required" /><br />
-                        </center>
+                        
                         <label>Email <span class="imp">*</span></label><br />
                         <input type="email" name="email" style="width: 100%" required="required" /><br />
                         <label>Message <span class="imp">*</span></label><br />
@@ -280,11 +297,11 @@
 
         <div class="feedbox">
             <div class="feed">
-                <form action="mailto:elearning@gmail.com" method="post" enctype="text/plain">
+                <form action="feedbook.php" method="POST">
                     <label>Your Name</label><br />
-                    <input type="text" name="" class="fname" required="required" /><br />
+                    <input type="text" name="name" class="fname" required="required" /><br />
                     <label>Email</label><br />
-                    <input type="email" name="mail" required="required" /><br />
+                    <input type="email" name="email" required="required" /><br />
                     <label>Additional Details</label><br />
                     <textarea name="addtional"></textarea><br />
                     <button type="submit" id="csubmit">Send Message</button>

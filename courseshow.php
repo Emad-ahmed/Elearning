@@ -5,8 +5,8 @@
 ?>
 
 
-<div class="container">
-<h1 class="text-center mt-5 mb-5"style = "margin-top:10rem">Courses</h1>
+<div class="container" style="margin-top:-22rem">
+<h1 class="text-center mt-5 mb-5">Courses</h1>
 <div class="row mt-5">
 
 <?php
@@ -35,8 +35,5 @@ while ($row = mysqli_fetch_array($alldata)) {
 
 </div>
 
-<footer>
-    <p>Copyright &copy; 2022 <img src="images/icon/favicon.png" alt="logo"> All Rights Reserved.</p>
-</footer>
 
     

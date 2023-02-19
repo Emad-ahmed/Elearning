@@ -16,7 +16,7 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="css/nav.css" />
         <link rel="stylesheet" href="css/footer.css" />
         <script type="text/javascript" src="script.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
@@ -87,6 +87,41 @@ session_start();
             </nav>
     </header>
 
+    <nav>
+        <div class="logo">
+        <div>
+            <a href="" class="elearn">E-Learning</a>
+        </div>
+        </div>
+        <div class="hamburger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <ul class="nav-links mt-3">
+                <li><a href="">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#services_section">Services</a></li>
+                <li><a href="#contactus">Contact</a></li>
+                <li><a href="#feedback">Feedback</a></li>
+                <li><a href="quiz/welcome.php?q=1">Quiz</a></li>
+                <?php 
+                if ((isset($_SESSION['email'])) || (isset($_SESSION['email'])) ) {
+                echo "<li><a class='login-button' href='logout.php'>Logout</a></li>";
+                } else{
+                    echo "<li><a class='login-button' href='login.php'>Login</a></li>";
+                }
+            ?>
+        
+        </ul>
+    </nav>
+
+
+
+
+    <script src="js/nav.js"></script>
 
         
 

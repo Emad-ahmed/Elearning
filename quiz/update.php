@@ -3,6 +3,8 @@
   session_start();
   $email=$_SESSION['email'];
 
+  echo $email;
+
   if(isset($_SESSION['key']))
   {
     if(@$_GET['email'] && $_SESSION['key']=='admin') 
@@ -97,10 +99,11 @@
     $qid=@$_GET['qid'];
     $q=mysqli_query($conn,"SELECT * FROM answer WHERE qid='$qid' " );
     while($row=mysqli_fetch_array($q) )
-    {  $ansid=$row['ansid']; }
+    {  
+    $ansid=$row['ansid']; }
     if($ans == $ansid)
     {
-      $q=mysqli_query($conn,"SELECT * FROM quiz WHERE eid='$eid' " );
+      $q=mysqli_query($conn,"SELECT * FROM quiz WHERE eid='$eid'");
       while($row=mysqli_fetch_array($q) )
       {
         $sahi=$row['sahi'];

@@ -70,11 +70,11 @@ session_start();
     <body>
         <!-- Navigation Bar -->
         <header id="header">
+            
             <nav>
                 <div>
                     <a href="index.php" class="elearn">E-Learning</a>
                 </div>
-
                 <?php
             if (isset($_SESSION['email'])) {
                 echo '<a class="get-started" href="logout.php">Logout</a>';
@@ -87,7 +87,7 @@ session_start();
                 <img src="images/icon/menu.png" class="menu" onclick="sideMenu(0)" alt="menu" />
             </nav>
 
-
+        </header>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
