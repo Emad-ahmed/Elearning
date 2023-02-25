@@ -83,7 +83,7 @@
 }
 
 .form_wrapper input[type="submit"] {
-  background: #DF2771;
+  background: #0984e3;
   height: 35px;
   line-height: 35px;
   width: 100%;
@@ -96,7 +96,7 @@
 }
 
 .form_wrapper input[type="submit"]:hover {
-  background: rgb(255, 2, 103);
+  background: #0984e3;
 }
 
 
@@ -107,3 +107,12 @@
   font-weight: bold;
 }
 /*# sourceMappingURL=reg.css.map */
+
+
+@media screen and (max-width: 900px) {
+	.form_wrapper {
+    
+    margin-top: -40rem !important;
+  }
+  
+}

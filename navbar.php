@@ -54,71 +54,44 @@ session_start();
 
 
     <body>
-        <!-- Navigation Bar -->
-        <header id="header">
-            <nav>
-                <div>
-                    <a href="" class="elearn">E-Learning</a>
-                </div>
-                <ul class="mt-3">
-                    <li><a href="">Home</a></li>
-                    <li><a href="#courses">Courses</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#services_section">Services</a></li>
-                    <li><a href="#contactus">Contact</a></li>
-                    <li><a href="#feedback">Feedback</a></li>
-                    <li><a href="quiz/welcome.php?q=1">Quiz</a></li>
-                </ul>
-                <div class="srch">
-                    <input type="text" class="search" placeholder="Search here..." /><img src="images/icon/search.png"
-                        alt="search" />
-                </div>
-                <?php
+       
+
+   
+
+
+
+    <nav style='margin-bottom:30rem'>
+	<input id="nav-toggle" type="checkbox">
+	<div class="logo"> <a href="" class="elearn">E-Learning</a></div>
+	<ul class="links">
+    <li><a href="">Home</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#services_section">Services</a></li>
+    <li><a href="#contactus">Contact</a></li>
+    <li><a href="#feedback">Feedback</a></li>
+    <li><a href="quiz/welcome.php?q=1">Quiz</a></li>
+
+    <?php
       if (isset($_SESSION['email'])) {
-        echo '<a class="get-started" href="logout.php">Logout</a>';
+        echo '<li><a class="get-started DonateNow" href="logout.php">Logout</a></li>';
       } else if (isset($_SESSION['admin'])) {
-        echo '<a class="get-started" href="logout.php">Logout</a>';
+        echo '<li><a class="get-started DonateNow" href="logout.php">Logout</a></li>';
       } else {
-        echo '<a class="get-started" href="login.php">Login</a>';
+        echo '<li><a class="get-started DonateNow" href="login.php">Login</a></li>';
       }
       ?>
-                <img src="images/icon/menu.png" class="menu" onclick="sideMenu(0)" alt="menu" />
-            </nav>
-    </header>
 
-    <nav>
-        <div class="logo">
-        <div>
-            <a href="" class="elearn">E-Learning</a>
-        </div>
-        </div>
-        <div class="hamburger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
-        <ul class="nav-links mt-3">
-                <li><a href="">Home</a></li>
-                <li><a href="#courses">Courses</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#services_section">Services</a></li>
-                <li><a href="#contactus">Contact</a></li>
-                <li><a href="#feedback">Feedback</a></li>
-                <li><a href="quiz/welcome.php?q=1">Quiz</a></li>
-                <?php 
-                if ((isset($_SESSION['email'])) || (isset($_SESSION['email'])) ) {
-                echo "<li><a class='login-button' href='logout.php'>Logout</a></li>";
-                } else{
-                    echo "<li><a class='login-button' href='login.php'>Login</a></li>";
-                }
-            ?>
-        
-        </ul>
-    </nav>
+	
 
-
+	</ul>
+	<label for="nav-toggle" class="icon-burger">
+		<div class="line"></div>
+		<div class="line"></div>
+		<div class="line"></div>
+	</label>
+</nav>
 
 
     <script src="js/nav.js"></script>

@@ -22,6 +22,7 @@
         {
             width:30rem;
         }
+       
         </style>
 
     

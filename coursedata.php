@@ -9,11 +9,12 @@ include 'config.php';
 
 if(isset($_SESSION['email']))
 {
+
   $email = $_SESSION['email'];    
   $data = mysqli_query($conn, "SELECT * FROM `user` WHERE email='$email'");
   $dataprofile = mysqli_fetch_array($data);
+  
 
-  $id = $dataprofile['id'];
 }
 
 
